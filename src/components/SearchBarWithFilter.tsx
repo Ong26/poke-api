@@ -3,7 +3,7 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-nativ
 import { debounce } from "../../utils/CommonUtils";
 import { orderByArray, sortByArray } from "../constants/poke";
 import pokemonApi from "../redux/api/pokeApi";
-import { clearFilters, filterResults, orderBy, search, sortBy } from "../redux/slice/pokeSlice";
+import { clearFilters, filterResults, orderBy, search, selectCategory, sortBy } from "../redux/slice/pokeSlice";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import { Option } from "../types";
 import DropDown from "./DropDown";
@@ -26,6 +26,7 @@ const SearchBarWithFilter = () => {
 		debounceChanged(txt);
 	}, []);
 	const clearFilter = useCallback(() => {
+		trigger({ category: "all" });
 		dispatch(clearFilters());
 	}, []);
 	return (
@@ -47,6 +48,7 @@ const SearchBarWithFilter = () => {
 						data={categories as Option[]}
 						value={categoryValue}
 						setValue={(value) => {
+							dispatch(selectCategory(value));
 							trigger({ category: value });
 						}}
 						width={100}

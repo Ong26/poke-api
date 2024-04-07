@@ -112,7 +112,7 @@ export const pokeSlice = createSlice({
 			});
 		},
 		clearFilters: (state) => {
-			1;
+			state.selectedCategory = "all";
 			state.search = "";
 			state.sortBy = "id";
 			state.orderBy = "asc";
@@ -156,6 +156,6 @@ export const pokeSlice = createSlice({
 			.addMatcher(pokemonApi.endpoints.getType.matchFulfilled, handleSpecificPokemonTypeFulfilled);
 	},
 });
-export const { search, filterResults, clearFilters, sortBy, orderBy, setStatus } = pokeSlice.actions;
+export const { search, filterResults, clearFilters, sortBy, orderBy, setStatus, selectCategory } = pokeSlice.actions;
 
 export default pokeSlice.reducer;
